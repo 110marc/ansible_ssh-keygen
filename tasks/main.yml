@@ -1,0 +1,16 @@
+---
+# tasks file for ansible_sshkeys
+- name: setting up {{ newuser_username }} .ssh directory
+  file:
+    path: "/home/{{ newuser_username }}/.ssh"
+    mode: "0700"
+    owner: "{{ newuser_username }}"
+    group: "{{ newuser_username }}"
+    state: directory
+
+- name: generate rsa ssh key pair for user {{ newuser_username }}
+  openssh_keypair:
+    path: "/home/{{ newuser_username }}/.ssh/id_rsa"
+    owner: "{{ newuser_username }}"
+    group: "{{ newuser_username }}"
+
